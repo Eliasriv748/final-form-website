@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drop 001 — Final Form</title>
+  <meta name="description" content="Drop 001 — Final Form's debut collection. Fit-casual streetwear inspired by old-era athletics. Limited quantities, no restocks.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── MOBILE NAV OVERLAY ── -->
+  <nav class="nav-overlay" id="navOverlay" role="dialog" aria-label="Navigation menu">
+    <button class="nav-overlay__close btn btn--secondary" onclick="closeNav()" aria-label="Close menu">&#x2715; CLOSE</button>
+    <a href="index.html">HOME</a>
+    <a href="collection.html">DROP 001</a>
+    <a href="product.html">THE FINAL RINGER</a>
+    <a href="cart.html">CART [0]</a>
+  </nav>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collection.html" class="active">Drop 001</a>
+        <a href="product.html">The Final Ringer</a>
+        <a href="cart.html" class="site-nav__cart">Cart [0]</a>
+      </nav>
+      <button class="nav-toggle" onclick="openNav()" aria-label="Open menu" aria-expanded="false" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── TOP TICKER ── -->
+  <div class="ticker" role="marquee" aria-label="Announcements">
+    <div class="ticker__content">
+      // DROP 001 // ALL ITEMS // LIMITED RUN // NO RESTOCKS // EQUIP OR MISS OUT // // DROP 001 // ALL ITEMS // LIMITED RUN // NO RESTOCKS // EQUIP OR MISS OUT //
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <!-- Page Title -->
+    <div class="page-title-block">
+      <p class="page-title-block__eyebrow">Final Form &mdash; Season 01</p>
+      <h1 class="page-title-block__heading">DROP<br>001</h1>
+    </div>
+
+    <!-- Filter / Stats bar -->
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 3rem 0.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div class="filter-pills" style="padding: 0;" role="group" aria-label="Filter by category">
+        <button class="filter-pill active" data-filter="all">All</button>
+        <button class="filter-pill" data-filter="tops">Tops</button>
+        <button class="filter-pill" data-filter="bottoms">Bottoms</button>
+        <button class="filter-pill" data-filter="headwear">Headwear</button>
+        <button class="filter-pill" data-filter="accessories">Accessories</button>
+      </div>
+      <p style="font-family: var(--font-pixel); font-size: 1.8rem; color: var(--color-tertiary);">14 PIECES</p>
+    </div>
+
+    <!-- Product Grid -->
+    <section class="collection-grid" aria-label="Drop 001 products">
+
+      <!-- 1 -->
+      <article class="product-card" data-category="tops">
+        <div class="product-card__image-wrap">
+          <div class="starburst starburst--yellow" aria-label="New item"><p>NEW!</p></div>
+          <div class="img-placeholder">
+            <span class="img-placeholder__label">THE FINAL<br>RINGER</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">The Final Ringer</h2>
+          <div class="product-card__price">$45.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 2 — Sold Out -->
+      <article class="product-card" data-category="bottoms" aria-label="Tactical Cargo Pants — Sold out">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--blue-mid">
+            <span class="img-placeholder__label">TACTICAL<br>CARGO PANTS</span>
+          </div>
+          <div class="product-card__sold-out" aria-hidden="true"><span>SOLD OUT</span></div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Tactical Cargo Pants</h2>
+          <div class="product-card__price product-card__price--sold-out">$85.00</div>
+          <button class="btn btn--ghost btn--full" disabled aria-disabled="true">UNAVAILABLE</button>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="product-card" data-category="tops">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--red">
+            <span class="img-placeholder__label">RETRO LOGO<br>HOODIE</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Retro Logo Hoodie</h2>
+          <div class="product-card__price">$70.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="product-card" data-category="headwear">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--blue-mid">
+            <span class="img-placeholder__label">POWER LEVEL<br>SNAPBACK</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Power Level Snapback</h2>
+          <div class="product-card__price">$35.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 5 — NEW -->
+      <article class="product-card" data-category="tops">
+        <div class="product-card__image-wrap">
+          <div class="starburst starburst--red" aria-label="New item"><p>HOT!</p></div>
+          <div class="img-placeholder">
+            <span class="img-placeholder__label">ATHLETE MODE<br>LONG SLEEVE</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Athlete Mode Long Sleeve</h2>
+          <div class="product-card__price">$55.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 6 — Sold Out -->
+      <article class="product-card" data-category="bottoms" aria-label="Varsity Track Shorts — Sold out">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--red">
+            <span class="img-placeholder__label">VARSITY TRACK<br>SHORTS</span>
+          </div>
+          <div class="product-card__sold-out" aria-hidden="true"><span>SOLD OUT</span></div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Varsity Track Shorts</h2>
+          <div class="product-card__price product-card__price--sold-out">$50.00</div>
+          <button class="btn btn--ghost btn--full" disabled aria-disabled="true">UNAVAILABLE</button>
+        </div>
+      </article>
+
+      <!-- 7 -->
+      <article class="product-card" data-category="accessories">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--blue-mid">
+            <span class="img-placeholder__label">STAT BOOST<br>CREW SOCKS</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Stat Boost Crew Socks</h2>
+          <div class="product-card__price">$18.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="product-card" data-category="tops">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder">
+            <span class="img-placeholder__label">LEVEL UP<br>POLO</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Level Up Polo</h2>
+          <div class="product-card__price">$60.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+      <!-- 9 -->
+      <article class="product-card" data-category="bottoms">
+        <div class="product-card__image-wrap">
+          <div class="img-placeholder img-placeholder--red">
+            <span class="img-placeholder__label">COACH'S<br>WINDBREAKER</span>
+          </div>
+        </div>
+        <div class="product-card__body">
+          <h2 class="product-card__name">Coach's Windbreaker</h2>
+          <div class="product-card__price">$95.00</div>
+          <a href="product.html" class="btn btn--primary btn--full">VIEW ITEM</a>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Bottom ticker -->
+    <div class="ticker ticker--white" aria-hidden="true">
+      <div class="ticker__content">
+        Final Form &bull; Drop 001 &bull; No Restocks &bull; High Stat Gear &bull; Fit-Casual &bull; Old Era Athletics &bull; Final Form &bull; Drop 001 &bull; No Restocks &bull; High Stat Gear &bull; Fit-Casual &bull; Old Era Athletics &bull;
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+        <p>&gt; FITNESS MEETS FASHION<br>&gt; DROP 001 ONLINE NOW</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <h3>Navigate</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collection.html">Drop 001</a></li>
+          <li><a href="product.html">The Final Ringer</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__social">
+        <h3>Follow</h3>
+        <div class="site-footer__social-links">
+          <a href="https://www.instagram.com/finalform.brand/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Final Form on Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@finalformbrand" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Final Form on TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="site-footer__bottom">
+      <span class="site-footer__copyright">&copy; 2026 Final Form. All rights reserved.</span>
+      <span class="site-footer__tagline">&gt; ENTERING FINAL FORM...</span>
+    </div>
+  </footer>
+
+  <script>
+    function openNav() {
+      document.getElementById('navOverlay').classList.add('open');
+      document.getElementById('navToggle').setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      document.getElementById('navOverlay').classList.remove('open');
+      document.getElementById('navToggle').setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeNav(); });
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+        pill.classList.add('active');
+        var filter = pill.dataset.filter;
+        document.querySelectorAll('.product-card').forEach(function(card) {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

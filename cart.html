@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Inventory — Final Form</title>
+  <meta name="description" content="Review your Final Form inventory before checkout.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ── MOBILE NAV OVERLAY ── -->
+  <nav class="nav-overlay" id="navOverlay" role="dialog" aria-label="Navigation menu">
+    <button class="nav-overlay__close btn btn--secondary" onclick="closeNav()" aria-label="Close menu">&#x2715; CLOSE</button>
+    <a href="index.html">HOME</a>
+    <a href="collection.html">DROP 001</a>
+    <a href="product.html">THE FINAL RINGER</a>
+    <a href="cart.html">CART [1]</a>
+  </nav>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="collection.html">Drop 001</a>
+        <a href="product.html">The Final Ringer</a>
+        <a href="cart.html" class="site-nav__cart active">Cart [1]</a>
+      </nav>
+      <button class="nav-toggle" onclick="openNav()" aria-label="Open menu" aria-expanded="false" id="navToggle">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── TOP TICKER ── -->
+  <div class="ticker" role="marquee" aria-label="Announcements">
+    <div class="ticker__content">
+      // REVIEW YOUR LOADOUT // CONFIRM YOUR GEAR // PROCEED TO BATTLE // LIMITED STOCK // DON'T SLEEP ON IT // // REVIEW YOUR LOADOUT // CONFIRM YOUR GEAR // PROCEED TO BATTLE // LIMITED STOCK // DON'T SLEEP ON IT //
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main>
+
+    <!-- Page title -->
+    <div class="page-title-block">
+      <p class="page-title-block__eyebrow">Final Form &mdash; Drop 001</p>
+      <h1 class="page-title-block__heading">YOUR<br>INVENTORY</h1>
+    </div>
+
+    <!-- Cart layout: items + summary -->
+    <div class="cart-layout" id="cartFull">
+
+      <!-- Cart Table -->
+      <div>
+        <table class="cart-table" aria-label="Shopping cart items">
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Size</th>
+              <th scope="col">Unit Cost</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+              <th scope="col"><span class="visually-hidden">Remove</span></th>
+            </tr>
+          </thead>
+          <tbody id="cartBody">
+
+            <!-- Row 1 -->
+            <tr>
+              <td data-label="Item">
+                <div class="cart-table__item">
+                  <div class="img-placeholder" style="width: 80px; height: 80px; flex-shrink: 0; border: var(--border-thin);">
+                    <span class="img-placeholder__label" style="font-size: 1rem;">RINGER</span>
+                  </div>
+                  <div>
+                    <div class="cart-table__item-name">The Final Ringer</div>
+                    <div class="cart-table__item-size">SIZE: S</div>
+                  </div>
+                </div>
+              </td>
+              <td data-label="Size">
+                <span style="font-family: var(--font-pixel); font-size: 1.8rem;">S</span>
+              </td>
+              <td data-label="Unit Cost">
+                <span class="cart-table__price">$45.00</span>
+              </td>
+              <td data-label="Qty">
+                <div class="qty-control" aria-label="Quantity for The Final Ringer">
+                  <button class="qty-control__btn" data-action="minus" aria-label="Decrease quantity">&#8722;</button>
+                  <span class="qty-control__value" aria-live="polite">1</span>
+                  <button class="qty-control__btn" data-action="plus" aria-label="Increase quantity">&#43;</button>
+                </div>
+              </td>
+              <td data-label="Total">
+                <span class="cart-table__price" id="row1total">$45.00</span>
+              </td>
+              <td data-label="Remove">
+                <button class="cart-table__remove" aria-label="Remove The Final Ringer from cart" onclick="removeItem(this)">&#x2715;</button>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr>
+              <td data-label="Item">
+                <div class="cart-table__item">
+                  <div class="img-placeholder img-placeholder--blue-mid" style="width: 80px; height: 80px; flex-shrink: 0; border: var(--border-thin);">
+                    <span class="img-placeholder__label" style="font-size: 1rem; color: var(--color-text);">HOODIE</span>
+                  </div>
+                  <div>
+                    <div class="cart-table__item-name">Retro Logo Hoodie</div>
+                    <div class="cart-table__item-size">SIZE: M</div>
+                  </div>
+                </div>
+              </td>
+              <td data-label="Size">
+                <span style="font-family: var(--font-pixel); font-size: 1.8rem;">M</span>
+              </td>
+              <td data-label="Unit Cost">
+                <span class="cart-table__price">$70.00</span>
+              </td>
+              <td data-label="Qty">
+                <div class="qty-control" aria-label="Quantity for Retro Logo Hoodie">
+                  <button class="qty-control__btn" data-action="minus" aria-label="Decrease quantity">&#8722;</button>
+                  <span class="qty-control__value" aria-live="polite">1</span>
+                  <button class="qty-control__btn" data-action="plus" aria-label="Increase quantity">&#43;</button>
+                </div>
+              </td>
+              <td data-label="Total">
+                <span class="cart-table__price" id="row2total">$70.00</span>
+              </td>
+              <td data-label="Remove">
+                <button class="cart-table__remove" aria-label="Remove Retro Logo Hoodie from cart" onclick="removeItem(this)">&#x2715;</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- Continue shopping link -->
+        <div style="margin-top: 2rem;">
+          <a href="collection.html" class="btn btn--ghost" style="font-size: 1.3rem;">
+            &larr; CONTINUE LOOTING
+          </a>
+        </div>
+      </div>
+
+      <!-- Checkout Panel -->
+      <aside class="checkout-panel" aria-label="Order summary">
+        <h2 class="checkout-panel__heading">BATTLE READY?</h2>
+
+        <div class="checkout-panel__row">
+          <span style="font-family: var(--font-pixel); font-size: 1.8rem;">SUBTOTAL</span>
+          <span class="cart-table__price" id="subtotal">$115.00</span>
+        </div>
+
+        <div class="checkout-panel__row">
+          <span style="font-family: var(--font-pixel); font-size: 1.8rem;">SHIPPING</span>
+          <span style="font-family: var(--font-pixel); font-size: 1.8rem; color: var(--color-accent);">CALCULATED</span>
+        </div>
+
+        <div class="checkout-panel__note" aria-label="Free shipping offer">
+          FREE SHIPPING OVER $75 &bull; YOU QUALIFY!
+        </div>
+
+        <div aria-label="Order total">
+          <span style="font-family: var(--font-header); font-size: 1.3rem; font-weight: 700; text-transform: uppercase; display: block;">Total</span>
+          <span class="checkout-panel__total" id="orderTotal" aria-live="polite">$115.00</span>
+        </div>
+
+        <a href="#" class="btn btn--primary btn--full btn--lg" aria-label="Proceed to checkout">
+          PROCEED TO CHECKOUT
+        </a>
+        <a href="collection.html" class="checkout-panel__continue">CONTINUE LOOTING &rarr;</a>
+      </aside>
+
+    </div><!-- /cart-layout -->
+
+    <!-- EMPTY STATE — hidden by default, shown via JS when cart is emptied -->
+    <div class="cart-layout" id="cartEmpty" style="display: none;">
+      <div class="cart-empty" role="status" aria-live="polite">
+        <div class="cart-empty__icon" aria-hidden="true"></div>
+        <h2 class="cart-empty__heading">INVENTORY EMPTY</h2>
+        <p class="cart-empty__sub">&gt; NO ITEMS EQUIPPED</p>
+        <a href="collection.html" class="btn btn--primary btn--lg">FIND YOUR GEAR &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Bottom ticker -->
+    <div class="ticker ticker--white" aria-hidden="true">
+      <div class="ticker__content">
+        Final Form &bull; Drop 001 &bull; No Restocks &bull; High Stat Gear &bull; Fit-Casual &bull; Old Era Athletics &bull; Final Form &bull; Drop 001 &bull; No Restocks &bull; High Stat Gear &bull; Fit-Casual &bull; Old Era Athletics &bull;
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+
+      <div class="site-footer__brand">
+        <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+        <p>&gt; FITNESS MEETS FASHION<br>&gt; DROP 001 ONLINE NOW</p>
+      </div>
+
+      <nav class="site-footer__nav" aria-label="Footer navigation">
+        <h3>Navigate</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="collection.html">Drop 001</a></li>
+          <li><a href="product.html">The Final Ringer</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+
+      <div class="site-footer__social">
+        <h3>Follow</h3>
+        <div class="site-footer__social-links">
+          <a href="https://www.instagram.com/finalform.brand/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Final Form on Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+          </a>
+          <a href="https://www.tiktok.com/@finalformbrand" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Final Form on TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            TikTok
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="site-footer__bottom">
+      <span class="site-footer__copyright">&copy; 2026 Final Form. All rights reserved.</span>
+      <span class="site-footer__tagline">&gt; ENTERING FINAL FORM...</span>
+    </div>
+  </footer>
+
+  <script>
+    function openNav() {
+      document.getElementById('navOverlay').classList.add('open');
+      document.getElementById('navToggle').setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      document.getElementById('navOverlay').classList.remove('open');
+      document.getElementById('navToggle').setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeNav(); });
+
+    // Qty controls with live total update
+    var prices = [45, 70]; // row prices in order
+
+    document.querySelectorAll('.qty-control').forEach(function(control, i) {
+      var minus = control.querySelector('[data-action="minus"]');
+      var plus  = control.querySelector('[data-action="plus"]');
+      var display = control.querySelector('.qty-control__value');
+
+      function updateRow() {
+        var qty = parseInt(display.textContent);
+        var rowTotals = document.querySelectorAll('[id^="row"]');
+        if (rowTotals[i]) {
+          rowTotals[i].textContent = '$' + (prices[i] * qty).toFixed(2);
+        }
+        recalcTotal();
+      }
+
+      minus.addEventListener('click', function() {
+        var q = parseInt(display.textContent);
+        if (q > 1) { display.textContent = q - 1; updateRow(); }
+      });
+      plus.addEventListener('click', function() {
+        display.textContent = parseInt(display.textContent) + 1;
+        updateRow();
+      });
+    });
+
+    function recalcTotal() {
+      var totals = document.querySelectorAll('[id^="row"]');
+      var sum = 0;
+      totals.forEach(function(el) {
+        sum += parseFloat(el.textContent.replace('$', ''));
+      });
+      document.getElementById('subtotal').textContent = '$' + sum.toFixed(2);
+      document.getElementById('orderTotal').textContent = '$' + sum.toFixed(2);
+    }
+
+    function removeItem(btn) {
+      var row = btn.closest('tr');
+      row.remove();
+      recalcTotal();
+      // Show empty state if no rows remain
+      if (document.querySelectorAll('#cartBody tr').length === 0) {
+        document.getElementById('cartFull').style.display = 'none';
+        document.getElementById('cartEmpty').style.display = '';
+      }
+    }
+  </script>
+
+</body>
+</html>
