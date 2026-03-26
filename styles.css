@@ -90,11 +90,16 @@ ul { list-style: none; }
 }
 
 .site-logo__img {
-  height: 52px;
-  width: 52px;
+  height: 72px;
+  width: 72px;
   object-fit: cover;
   border: 3px solid var(--color-white);
   display: block;
+}
+
+.site-header .site-logo__img {
+  height: 72px;
+  width: 72px;
 }
 
 .site-nav {
