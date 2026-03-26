@@ -84,15 +84,17 @@ ul { list-style: none; }
 }
 
 .site-logo {
-  font-family: var(--font-header);
-  font-size: 3.6rem;
-  font-weight: 700;
-  color: var(--color-white);
-  text-transform: uppercase;
-  text-shadow: 3px 3px 0 var(--color-primary), 5px 5px 0 rgba(0,0,0,0.6);
-  letter-spacing: -2px;
-  line-height: 1;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.site-logo__img {
+  height: 52px;
+  width: 52px;
+  object-fit: cover;
+  border: 3px solid var(--color-white);
+  display: block;
 }
 
 .site-nav {
@@ -776,10 +778,10 @@ ul { list-style: none; }
   align-items: start;
 }
 
-.site-footer__brand .site-logo {
-  font-size: 3rem;
-  color: var(--color-white);
-  text-shadow: 3px 3px 0 var(--color-primary), 5px 5px 0 rgba(0,68,255,0.6);
+.site-footer__brand .site-logo .site-logo__img {
+  height: 70px;
+  width: 70px;
+  border: 3px solid var(--color-primary);
 }
 
 .site-footer__brand p {

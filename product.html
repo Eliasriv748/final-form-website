@@ -21,7 +21,7 @@
   <!-- ── HEADER ── -->
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+      <a href="index.html" class="site-logo" aria-label="Final Form home"><img src="logo-red.jpg" alt="Final Form" class="site-logo__img"></a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <a href="collection.html">Drop 001</a>
@@ -52,20 +52,18 @@
       <!-- LEFT: Gallery -->
       <div class="product-gallery">
         <div class="product-gallery__main">
-          <div class="img-placeholder" style="aspect-ratio: 4/5;">
-            <span class="img-placeholder__label" style="font-size: 3rem;">THE FINAL<br>RINGER</span>
-          </div>
+          <img src="final-ringer-1.webp" alt="The Final Ringer — full flat lay" class="product-gallery__main-img" id="mainGalleryImg" style="width:100%; aspect-ratio:4/5; object-fit:cover; display:block; border: var(--border-thick);">
           <div class="product-gallery__file-label" aria-label="Item file number 0042">ITEM FILE #0042</div>
         </div>
         <div class="product-gallery__thumbs" role="list" aria-label="Product images">
-          <div class="product-gallery__thumb active" role="listitem" tabindex="0" aria-label="View image 1">
-            <div class="img-placeholder" style="width: 80px; height: 80px; border: none;"><span class="img-placeholder__label" style="font-size: 1.1rem;">FRONT</span></div>
+          <div class="product-gallery__thumb active" role="listitem" tabindex="0" aria-label="View image 1" data-src="final-ringer-1.webp">
+            <img src="final-ringer-1.webp" alt="Full flat lay" style="width:80px;height:80px;object-fit:cover;display:block;">
           </div>
-          <div class="product-gallery__thumb" role="listitem" tabindex="0" aria-label="View image 2">
-            <div class="img-placeholder img-placeholder--blue-mid" style="width: 80px; height: 80px; border: none;"><span class="img-placeholder__label" style="font-size: 1.1rem; color: var(--color-text);">BACK</span></div>
+          <div class="product-gallery__thumb" role="listitem" tabindex="0" aria-label="View image 2" data-src="final-ringer-2.webp">
+            <img src="final-ringer-2.webp" alt="Neck tag detail" style="width:80px;height:80px;object-fit:cover;display:block;">
           </div>
-          <div class="product-gallery__thumb" role="listitem" tabindex="0" aria-label="View image 3">
-            <div class="img-placeholder img-placeholder--red" style="width: 80px; height: 80px; border: none;"><span class="img-placeholder__label" style="font-size: 1.1rem;">DETAIL</span></div>
+          <div class="product-gallery__thumb" role="listitem" tabindex="0" aria-label="View image 3" data-src="final-ringer-3.webp">
+            <img src="final-ringer-3.webp" alt="Graphic print close-up" style="width:80px;height:80px;object-fit:cover;display:block;">
           </div>
         </div>
       </div>
@@ -233,7 +231,7 @@
     <div class="site-footer__inner">
 
       <div class="site-footer__brand">
-        <a href="index.html" class="site-logo" aria-label="Final Form home">Final<br>Form</a>
+        <a href="index.html" class="site-logo" aria-label="Final Form home"><img src="logo-red.jpg" alt="Final Form" class="site-logo__img"></a>
         <p>&gt; FITNESS MEETS FASHION<br>&gt; DROP 001 ONLINE NOW</p>
       </div>
 
@@ -293,11 +291,16 @@
       });
     });
 
-    // Thumbnail interaction
+    // Thumbnail interaction — swap main image
     document.querySelectorAll('.product-gallery__thumb').forEach(function(thumb) {
       thumb.addEventListener('click', function() {
         document.querySelectorAll('.product-gallery__thumb').forEach(function(t) { t.classList.remove('active'); });
         thumb.classList.add('active');
+        var newSrc = thumb.dataset.src;
+        if (newSrc) {
+          var main = document.getElementById('mainGalleryImg');
+          main.src = newSrc;
+        }
       });
       thumb.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); thumb.click(); }
