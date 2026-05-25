@@ -1,0 +1,26 @@
+@import url('./fonts.css');
+
+:root {
+  --cream:        #f5f2ed;
+  --cream-deep:   #f0ece4;
+  --red:          #e8382b;
+  --dark:         #222222;
+  --mid:          #888888;
+  --border:       #d4cec4;
+  --slot-bg:      #ddd8ce;
+  --slot-border:  #c8c2b8;
+  --font-brand:   'BrandFont', system-ui, sans-serif;
+  --sidebar-w:    130px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--dark);
+  font-family: var(--font-brand);
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-brand); }
