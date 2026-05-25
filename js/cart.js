@@ -50,7 +50,9 @@ export function getSubtotal() {
 
 function updateCartBadge() {
   const badge = document.getElementById('cart-badge');
-  if (badge) badge.textContent = getTotalQty() || '';
+  if (!badge) return;
+  const qty = getTotalQty();
+  badge.textContent = qty ? `(${qty})` : '';
 }
 
 export function renderCartGrid() {

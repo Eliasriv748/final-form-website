@@ -15,9 +15,11 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { color-scheme: light only; }
+
 body {
-  background: var(--cream);
-  color: var(--dark);
+  background: #f5f2ed;
+  color: #222222;
   font-family: var(--font-brand);
   overflow-x: hidden;
 }
