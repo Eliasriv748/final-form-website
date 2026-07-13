@@ -6,7 +6,7 @@ const PRODUCTS = {
     id: 'ff-001',
     name: 'The Final Ringer',
     price: 45,
-    images: ['final-ringer-1.webp', 'final-ringer-2.webp', 'final-ringer-3.webp'],
+    images: ['RINGER_RED_PRODUCT_FRONT.png', 'final-ringer-2.webp', 'final-ringer-3.webp'],
     description: [
       'Classic muscle fit',
       '100% cotton jersey',

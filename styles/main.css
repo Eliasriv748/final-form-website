@@ -1,14 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&display=swap');
 @import url('./fonts.css');
 
 :root {
-  --cream:        #f5f2ed;
-  --cream-deep:   #f0ece4;
-  --red:          #e8382b;
-  --dark:         #222222;
-  --mid:          #888888;
-  --border:       #d4cec4;
-  --slot-bg:      #ddd8ce;
-  --slot-border:  #c8c2b8;
+  --cream:        #f8f7f5;
+  --cream-deep:   #f2f0ed;
+  --red:          #c0281e;
+  --dark:         #1a1a1a;
+  --mid:          #999999;
+  --border:       #e8e4e0;
+  --slot-bg:      #f0eeeb;
+  --slot-border:  #dedad6;
   --font-brand:   'BrandFont', system-ui, sans-serif;
   --sidebar-w:    130px;
 }
@@ -20,7 +21,8 @@ html { color-scheme: light only; }
 body {
   background: #f5f2ed;
   color: #222222;
-  font-family: var(--font-brand);
+  font-brand:   'Cinzel', 'BrandFont', serif;
+  font-body:    'Cinzel', serif;
   overflow-x: hidden;
 }
 

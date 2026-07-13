@@ -18,17 +18,21 @@
 }
 
 .product-heading {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  line-height: 1.4;
+  line-height: 1.6;
   color: var(--dark);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
+
 .product-price-lg {
-  font-size: 18px;
-  letter-spacing: 1px;
+  font-size: 22px;
+  font-size: 400;
+  letter-spacing: 2px;
   color: var(--dark);
 }
 
@@ -53,11 +57,11 @@
 
 #add-to-cart, #buy-now {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   font-family: var(--font-brand);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   cursor: pointer;
   transition: opacity 0.2s;
@@ -67,13 +71,13 @@
 
 #add-to-cart {
   background: white;
-  border: 1.5px solid var(--dark);
+  border: 2px solid var(--dark);
   color: var(--dark);
 }
 
 #buy-now {
   background: var(--dark);
-  border: 1.5px solid var(--dark);
+  border: 2px solid var(--dark);
   color: white;
 }
 
@@ -86,7 +90,7 @@
 
 #product-description li {
   font-size: 11px;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--mid);
 }
