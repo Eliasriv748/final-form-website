@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Final Ringer — Final Form</title>
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/collection.css">
+  <link rel="stylesheet" href="styles/product.css">
+  <link rel="stylesheet" href="styles/cart.css">
+</head>
+<body class="product-page-body">
+
+  <!-- ── SIDEBAR ── -->
+  <nav id="sidebar" class="sidebar-visible">
+    <a class="nav-link" href="index.html">SHOP</a>
+    <a class="nav-link" href="index.html">ARCHIVE</a>
+    <a class="nav-link" href="index.html">ABOUT</a>
+    <button class="nav-link" id="cart-trigger" data-open-cart>INVENTORY<br><span id="cart-badge"></span></button>
+  </nav>
+
+  <!-- ── PRODUCT MAIN ── -->
+  <main id="product-main">
+
+    <!-- Info panel -->
+    <div id="product-info">
+      <h1 class="product-heading">The Final<br>Ringer</h1>
+      <span class="product-price-lg">$45.00</span>
+
+      <ul id="product-description">
+        <li>Classic muscle fit</li>
+        <li>100% cotton jersey</li>
+        <li>Optic white colorway</li>
+        <li>Final Form logo front print</li>
+      </ul>
+
+      <div id="size-selector">
+        <button class="size-btn">XS</button>
+        <button class="size-btn selected">S</button>
+        <button class="size-btn">M</button>
+        <button class="size-btn">L</button>
+        <button class="size-btn">XL</button>
+      </div>
+
+      <button id="add-to-cart">ADD TO INVENTORY</button>
+      <button id="buy-now">BUY NOW</button>
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel-wrapper">
+      <button class="carousel-btn" id="carousel-prev">&#8249;</button>
+      <div id="product-images"></div>
+      <button class="carousel-btn" id="carousel-next">&#8250;</button>
+    </div>
+
+  </main>
+
+  <!-- ── INVENTORY MODAL ── -->
+  <div id="cart-backdrop" hidden></div>
+  <div id="cart-modal" hidden role="dialog" aria-modal="true" aria-label="Inventory">
+    <div id="cart-header">
+      <span id="cart-title">— INVENTORY —</span>
+      <button id="cart-close" aria-label="Close inventory">✕</button>
+    </div>
+    <div id="cart-grid"></div>
+    <div id="cart-footer">
+      <div id="cart-subtotal">
+        <span>SUBTOTAL</span>
+        <span id="cart-subtotal-amount">$0.00</span>
+      </div>
+      <a href="#" id="cart-checkout">CHECKOUT</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/cart.js"></script>
+  <script type="module" src="js/product red ringer  .js"></script>
+
+</body>
+</html>
