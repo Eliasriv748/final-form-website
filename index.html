@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Final Form — old-era athletics, built for now. Shop Drop 001.">
+  <title>Final Form — Drop 001</title>
+  <link rel="stylesheet" href="styles/site.css">
+</head>
+<body>
+  <nav class="side-nav" aria-label="Main navigation">
+    <a class="side-nav__mark" href="index.html" aria-label="Final Form home">FINAL<br>FORM</a>
+    <a class="side-nav__link" href="#shop">Shop</a>
+    <a class="side-nav__link" href="collection.html">Drop 001</a>
+    <a class="side-nav__link" href="#archive">Archive</a>
+    <a class="side-nav__link" href="#about">About</a>
+    <button class="side-nav__cart" type="button" data-open-cart>Inventory (<span class="cart-count" data-cart-count>0</span>)</button>
+  </nav>
+  <header class="mobile-bar">
+    <a class="mobile-bar__mark" href="index.html">FINAL FORM</a>
+    <button type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu">MENU</button>
+  </header>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+    <a href="#shop">Shop</a><a href="collection.html">Drop 001</a><a href="#archive">Archive</a><a href="#about">About</a><a href="cart.html">Inventory (<span data-cart-count>0</span>)</a>
+  </nav>
+
+  <main class="page-shell">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-fallback" aria-hidden="true"></div>
+      <canvas id="scene-canvas" aria-hidden="true"></canvas>
+      <div class="hero__grain" aria-hidden="true"></div>
+      <div class="hero__content">
+        <h1 class="hero__title" id="hero-title"><span id="logo">FINAL FORM</span></h1>
+        <p class="hero__sub">Old-era athletics · New-era form</p>
+      </div>
+      <a class="hero__scroll" href="#shop">Enter Drop 001 ↓</a>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="content-wrap">
+        <header class="section-heading">
+          <div><p class="eyebrow">Drop 001 · Live now</p><h2>The Final Ringer</h2></div>
+          <p class="section-heading__meta">2 colorways · Limited run</p>
+        </header>
+        <div class="product-grid">
+          <a class="product-tile" href="product-red.html">
+            <div class="product-tile__media"><span class="product-tile__flag">Drop 001</span><img src="ringer-red-product.webp" alt="White Final Form ringer tee with red trim"></div>
+            <div class="product-tile__info"><div><h3 class="product-tile__name">The Final Ringer</h3><span class="product-tile__color">Red / Optic White</span></div><span class="product-tile__price">$45.00</span></div>
+          </a>
+          <a class="product-tile" href="product-black.html">
+            <div class="product-tile__media"><span class="product-tile__flag">Drop 001</span><img src="ringer-black-product.webp" alt="White Final Form ringer tee with black trim"></div>
+            <div class="product-tile__info"><div><h3 class="product-tile__name">The Final Ringer</h3><span class="product-tile__color">Black / Optic White</span></div><span class="product-tile__price">$45.00</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-wrap brand-block" id="archive">
+      <div><p class="eyebrow">Archive · Entry 001</p><h2>Built from<br>the first rep.</h2></div>
+      <p class="brand-block__copy">Drop 001 marks the beginning: heavyweight everyday pieces informed by the confidence, graphics, and silhouettes of old-era athletics. Limited quantities. No automatic restocks.</p>
+    </section>
+    <section class="content-wrap brand-block" id="about">
+      <div><p class="eyebrow">Final Form · Est. 2003</p><h2>Fitness meets<br>fashion.</h2></div>
+      <p class="brand-block__copy">Final Form is fit-casual apparel for movement inside and outside the gym. Each piece is made to feel earned, worn in, and ready for whatever comes next.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="content-wrap site-footer__inner"><div class="site-footer__brand">FINAL<br>FORM</div><div class="site-footer__links"><a href="https://www.instagram.com/finalform.brand/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.tiktok.com/@finalformbrand" target="_blank" rel="noopener noreferrer">TikTok</a><span>© 2026</span></div></div></footer>
+
+  <div class="drawer-backdrop" data-cart-backdrop></div>
+  <aside class="cart-drawer" aria-label="Inventory" aria-modal="true" role="dialog">
+    <div class="drawer-head"><h2>Inventory (<span data-cart-count>0</span>)</h2><button class="icon-button" type="button" data-close-cart aria-label="Close inventory">×</button></div>
+    <div class="drawer-items" data-drawer-items></div>
+    <div class="drawer-foot"><div class="drawer-total"><span>Subtotal</span><span data-drawer-subtotal>$0.00</span></div><a class="drawer-link" href="cart.html">Review inventory</a></div>
+  </aside>
+
+  <script type="module" src="js/scene.js"></script>
+  <script type="module" src="js/logo.js"></script>
+  <script type="module" src="js/site.js"></script>
+</body>
+</html>
