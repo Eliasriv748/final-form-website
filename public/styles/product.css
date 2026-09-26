@@ -21,7 +21,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   line-height: 1.6;
   color: var(--dark);
   word-break: break-word;
@@ -62,7 +62,7 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 4px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   cursor: pointer;
   transition: opacity 0.2s;
 }
@@ -91,7 +91,7 @@
 #product-description li {
   font-size: 11px;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: var(--mid);
 }
 

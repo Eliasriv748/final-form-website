@@ -42,7 +42,7 @@
   bottom: 24px;
   font-size: 11px;
   letter-spacing: 4px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   color: rgba(255,255,255,0.5);
   animation: hint-fade 2s ease-in-out infinite;
 }

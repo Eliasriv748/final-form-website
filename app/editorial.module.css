@@ -1,15 +1,15 @@
 .page { min-height: 100svh; padding: calc(var(--header-height) + 64px) var(--gutter) 90px; }
-.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: lowercase; }
 .page h1 { color: var(--signal); font-family: var(--display); font-size: clamp(34px, 6.1vw, 100px); letter-spacing: -.04em; line-height: 1.1; margin: 28px 0 48px; -webkit-text-stroke: .7px currentColor; }
 .story { display: grid; gap: 28px; max-width: 660px; }
 .story p { font-size: clamp(16px, 1.4vw, 20px); line-height: 1.8; }
-.link { border-bottom: 1px solid currentColor; display: inline-block; font-size: 11px; letter-spacing: .12em; margin-top: 40px; padding: 12px 0; text-transform: uppercase; }
+.link { border-bottom: 1px solid currentColor; display: inline-block; font-size: 11px; letter-spacing: .12em; margin-top: 40px; padding: 12px 0; text-transform: lowercase; }
 .link span { margin-left: 20px; }
 .gallery { align-items: start; display: grid; gap: 4vw; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .gallery figure { margin: 0; }
 .photo { aspect-ratio: 4 / 5; background: white; border: 1px solid var(--line); position: relative; }
 .photo img { object-fit: contain; }
-.gallery figcaption { font-size: 10px; letter-spacing: .14em; padding-top: 14px; text-transform: uppercase; }
+.gallery figcaption { font-size: 10px; letter-spacing: .14em; padding-top: 14px; text-transform: lowercase; }
 @media (max-width: 700px) {
   .page { padding-top: calc(var(--header-height) + 40px); }
   .gallery { grid-template-columns: 1fr; gap: 40px; }

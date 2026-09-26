@@ -68,7 +68,7 @@
   line-height: 1.15;
   padding: 12px 4px;
   position: relative;
-  text-transform: uppercase;
+  text-transform: lowercase;
   -webkit-text-stroke: 2.5px currentColor;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .controls { align-items: center; display: flex; gap: 10px; margin-top: 18px; }
-.controls p { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.controls p { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: lowercase; }
 .controls button { background: none; border: 0; cursor: pointer; font-size: 18px; height: 44px; width: 44px; }
 .controls button:hover { transform: translateY(-2px); }
 .controls button:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
