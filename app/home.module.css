@@ -1,0 +1,135 @@
+.home {
+  --athletics-red: var(--signal);
+  background: var(--paper);
+  color: var(--athletics-red);
+  min-height: 100svh;
+  overflow: clip;
+  position: relative;
+}
+
+.artwork { position: absolute; inset: 0; }
+.image { object-fit: cover; object-position: center; }
+
+.navigation {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 57%;
+  min-height: 100svh;
+  padding: 80px 2vw;
+  position: relative;
+  width: 43%;
+}
+
+.wheel {
+  --step: clamp(100px, 13vh, 155px);
+  height: calc(var(--step) * 3.6);
+  isolation: isolate;
+  mask-image: linear-gradient(transparent, #000 12%, #000 88%, transparent);
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-x pinch-zoom;
+  user-select: none;
+  width: 100%;
+}
+
+.wheel:focus-visible { outline: 1px dashed var(--athletics-red); outline-offset: -12px; }
+
+.slot {
+  align-items: center;
+  display: flex;
+  height: var(--step);
+  justify-content: center;
+  left: 0;
+  opacity: max(0, calc(1 - var(--distance) * .75));
+  position: absolute;
+  top: calc(50% - var(--step) / 2);
+  transform: perspective(800px) translateY(calc(var(--offset) * var(--step))) rotateX(calc(var(--offset) * -24deg)) scale(calc(1 - var(--distance) * .12));
+  transition: transform 600ms cubic-bezier(.22, .8, .25, 1), opacity 500ms ease;
+  width: 100%;
+  will-change: transform, opacity;
+}
+
+.slot[aria-hidden="true"] { pointer-events: none; }
+.slot[data-active="true"] { z-index: 1; }
+
+.label {
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: inline-block;
+  font-family: var(--display);
+  font-size: clamp(40px, 4.7vw, 90px);
+  font-weight: 400;
+  letter-spacing: -.045em;
+  line-height: 1.15;
+  padding: 12px 4px;
+  position: relative;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2.5px currentColor;
+}
+
+.label:focus-visible { outline: 2px solid currentColor; outline-offset: 8px; }
+.slot[data-active="true"] .label:hover { color: #c51b13; }
+.enter {
+  font-family: Arial, sans-serif;
+  font-size: .24em;
+  position: absolute;
+  right: -.9em;
+  top: 22%;
+  -webkit-text-stroke: 0;
+}
+
+.controls { align-items: center; display: flex; gap: 10px; margin-top: 18px; }
+.controls p { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.controls button { background: none; border: 0; cursor: pointer; font-size: 18px; height: 44px; width: 44px; }
+.controls button:hover { transform: translateY(-2px); }
+.controls button:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+.horizontalArrow, .mobileHint { display: none; }
+
+@media (max-width: 900px), (max-aspect-ratio: 6/5) {
+  .home { align-items: center; display: flex; flex-direction: column; justify-content: center; padding: 38px 0 24px; }
+  .artwork {
+    flex-shrink: 0;
+    height: min(62svh, 120vw);
+    mask-image: linear-gradient(#000 90%, transparent);
+    min-height: 250px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+  .image {
+    height: 100% !important;
+    left: 50% !important;
+    max-width: none;
+    object-fit: contain;
+    right: auto !important;
+    transform: translateX(-34%);
+    width: auto !important;
+  }
+  .navigation { margin: 0; min-height: 0; padding: 0; width: 100%; }
+  .wheel {
+    --step: 34vw;
+    height: clamp(110px, 20svh, 170px);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    touch-action: pan-y pinch-zoom;
+  }
+  .slot {
+    height: 100%;
+    left: calc(50% - var(--step) / 2);
+    top: 0;
+    transform: perspective(800px) translateX(calc(var(--offset) * var(--step))) rotateY(calc(var(--offset) * 24deg)) scale(calc(1 - var(--distance) * .12));
+    width: var(--step);
+  }
+  .label { font-size: clamp(28px, 7.7vw, 66px); -webkit-text-stroke-width: 1.5px; }
+  .controls { margin-top: 0; }
+  .verticalArrow, .desktopHint { display: none; }
+  .horizontalArrow, .mobileHint { display: inline; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot { transition: none; }
+}

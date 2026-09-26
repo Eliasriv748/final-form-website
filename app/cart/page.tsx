@@ -26,7 +26,7 @@ export default function CartPage() {
               <span>{money(line.price * line.quantity, line.currencyCode)}</span>
             </article>)}
           </section>
-          <aside className="order-summary"><p>Order summary</p><div><span>Subtotal</span><span>{money(subtotal, lines[0]?.currencyCode)}</span></div><div><span>Shipping</span><span>Calculated at checkout</span></div><button type="button" disabled>Checkout awaiting Shopify</button><small>Connect the Storefront cart mutations before enabling checkout.</small></aside>
+          <aside className="order-summary"><p>Order summary</p><div><span>Subtotal</span><span>{money(subtotal, lines[0]?.currencyCode)}</span></div><div><span>Shipping</span><span>Calculated at checkout</span></div><button type="button" disabled>Checkout coming soon</button><small>Online checkout is not available yet.</small></aside>
         </div>
       )}
     </main>

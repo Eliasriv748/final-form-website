@@ -6,8 +6,8 @@ import { useCart } from "@/components/cart-provider";
 
 const links = [
   { href: "/collections/drop-001", label: "Shop" },
-  { href: "/#collection", label: "Collection" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/about", label: "About" },
+  { href: "/lookbook", label: "Lookbook" },
 ];
 
 export function SiteHeader() {

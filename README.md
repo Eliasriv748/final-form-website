@@ -1,5 +1,7 @@
 # Final Form V2
 
+Latest project checkpoint: [HANDOFF.md](HANDOFF.md).
+
 Final Form V2 is a Next.js App Router storefront for an independent apparel
 brand. The current implementation preserves the original V2 product assets and
 cart interaction while establishing a typed headless Shopify boundary.
