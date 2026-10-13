@@ -225,10 +225,13 @@ body:has(.home-landing) .mobile-menu {
     display: flex;
     font-family: var(--display);
     font-size: clamp(28px, 7.5vw, 56px);
+    font-weight: 400;
     justify-content: space-between;
+    letter-spacing: -0.02em;
     padding: 22px 0;
     text-align: left;
-    text-transform: lowercase;
+    text-transform: uppercase;
+    webkit-text-stroke: 0.4px currentColor;
 }
 .mobile-menu span {
     font-family: var(--sans);
