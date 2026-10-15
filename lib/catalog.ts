@@ -28,10 +28,19 @@ export const previewProducts: Product[] = [
       "Final Form front graphic",
     ],
     images: [
-      { url: "/ringer-red-product.webp", altText: "White Final Form ringer tee with red trim" },
+      {
+        url: "/ringer-red-product.webp",
+        altText: "White Final Form ringer tee with red trim",
+      },
       { url: "/final-ringer-1.webp", altText: "Red Final Ringer laid flat" },
-      { url: "/final-ringer-2.webp", altText: "Detail of the red Final Ringer collar" },
-      { url: "/final-ringer-3.webp", altText: "Detail of the Final Form chest print" },
+      {
+        url: "/final-ringer-2.webp",
+        altText: "Detail of the red Final Ringer collar",
+      },
+      {
+        url: "/final-ringer-3.webp",
+        altText: "Detail of the Final Form chest print",
+      },
     ],
     variants: previewVariants("red"),
   },
@@ -48,7 +57,10 @@ export const previewProducts: Product[] = [
       "Final Form front graphic",
     ],
     images: [
-      { url: "/ringer-black-product.webp", altText: "White Final Form ringer tee with black trim" },
+      {
+        url: "/ringer-black-product.webp",
+        altText: "White Final Form ringer tee with black trim",
+      },
     ],
     variants: previewVariants("black"),
   },

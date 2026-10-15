@@ -1,6 +1,6 @@
 const domain = process.env.SHOPIFY_STORE_DOMAIN;
 const token = process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN;
-const apiVersion = process.env.SHOPIFY_STOREFRONT_API_VERSION ?? "2026-07";
+const apiVersion = process.env.SHOPIFY_STOREFRONT_API_VERSION ?? "2026-10";
 
 export function isShopifyConfigured() {
   return Boolean(domain && token);

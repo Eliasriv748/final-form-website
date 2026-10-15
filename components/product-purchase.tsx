@@ -14,13 +14,24 @@ export function ProductPurchase({ product }: { product: Product }) {
   );
   const state = selected ? getPurchaseState(selected) : "unavailable";
 
-  if (!selected) return <p className="product-status product-status--unavailable">Unavailable</p>;
+  if (!selected)
+    return (
+      <p className="product-status product-status--unavailable">Unavailable</p>
+    );
 
-  const buttonLabel = state === "preorder" ? "Preorder" : state === "in_stock" ? "Add to inventory" : "Unavailable";
+  const buttonLabel =
+    state === "preorder"
+      ? "Preorder"
+      : state === "in_stock"
+        ? "Add to cart"
+        : "Unavailable";
 
   return (
     <div className="purchase-panel">
-      <div className="size-heading"><span>Select size</span><button type="button">Size guide</button></div>
+      <div className="size-heading">
+        <span>Select size</span>
+        <button type="button">Size guide</button>
+      </div>
       <div className="size-row" role="group" aria-label="Select size">
         {product.variants.map((variant) => {
           const variantState = getPurchaseState(variant);
@@ -32,7 +43,9 @@ export function ProductPurchase({ product }: { product: Product }) {
               disabled={variantState === "unavailable"}
               onClick={() => setSelectedId(variant.id)}
               aria-pressed={variant.id === selectedId}
-            >{variant.title}</button>
+            >
+              {variant.title}
+            </button>
           );
         })}
       </div>
@@ -40,24 +53,33 @@ export function ProductPurchase({ product }: { product: Product }) {
         className="purchase-button"
         type="button"
         disabled={state === "unavailable"}
-        onClick={() => addLine({
-          merchandiseId: selected.id,
-          productHandle: product.handle,
-          name: product.title,
-          color: product.color,
-          size: selected.title,
-          price: Number(selected.price.amount),
-          currencyCode: selected.price.currencyCode,
-          image: product.images[0]?.url ?? "",
-          preorder: state === "preorder",
-        })}
-      >{buttonLabel} <span>{formatMoney(selected.price)}</span></button>
+        onClick={() =>
+          addLine({
+            merchandiseId: selected.id,
+            productHandle: product.handle,
+            name: product.title,
+            color: product.color,
+            size: selected.title,
+            price: Number(selected.price.amount),
+            currencyCode: selected.price.currencyCode,
+            image: product.images[0]?.url ?? "",
+            preorder: state === "preorder",
+          })
+        }
+      >
+        {buttonLabel} <span>{formatMoney(selected.price)}</span>
+      </button>
       <p className={`product-status product-status--${state}`}>
         {state === "in_stock" && "In stock · Ready to ship"}
         {state === "preorder" && "Preorder · Ships when production completes"}
         {state === "unavailable" && "Currently unavailable"}
       </p>
-      {state === "preorder" && <p className="preorder-note">This size has moved into preorder. Estimated timing will be confirmed before checkout.</p>}
+      {state === "preorder" && (
+        <p className="preorder-note">
+          This size has moved into preorder. Estimated timing will be confirmed
+          before checkout.
+        </p>
+      )}
     </div>
   );
 }
