@@ -11,7 +11,7 @@ export function ProductGallery({ images }: { images: ProductImage[] }) {
 
   return (
     <section className="product-gallery" aria-label="Product images">
-      <Image src={image.url} alt={image.altText} width={image.width ?? 1200} height={image.height ?? 1200} priority />
+      <Image src={image.url} alt={image.altText ?? "Final Form product image"} width={image.width ?? 1200} height={image.height ?? 1200} priority />
       {images.length > 1 && <div className="gallery-index" aria-label="Choose product image">
         {images.map((item, index) => (
           <button key={item.url} className={index === active ? "active" : ""} type="button" onClick={() => setActive(index)}>

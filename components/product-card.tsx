@@ -11,7 +11,7 @@ export function ProductCard({ product, priority = false }: { product: Product; p
   return (
     <Link className="product-card" href={`/products/${product.handle}`}>
       <div className="product-card__media">
-        {image && <Image src={image.url} alt={image.altText} width={image.width ?? 1000} height={image.height ?? 1000} priority={priority} />}
+        {image && <Image src={image.url} alt={image.altText ?? product.title} width={image.width ?? 1000} height={image.height ?? 1000} priority={priority} />}
         <span>{state === "preorder" ? "Preorder" : state === "in_stock" ? "Available" : "Unavailable"}</span>
       </div>
       <div className="product-card__meta">

@@ -11,7 +11,14 @@ function money(amount: number, currency = "USD") {
 }
 
 export default function CartPage() {
-  const { lines, count, subtotal, changeQuantity, removeLine } = useCart();
+  const {
+    lines,
+    count,
+    subtotal,
+    checkoutUrl,
+    changeQuantity,
+    removeLine,
+  } = useCart();
 
   return (
     <main className="cart-page">
@@ -66,19 +73,26 @@ export default function CartPage() {
             ))}
           </section>
           <aside className="order-summary">
-            <p>Order summary</p>
+              <p>Order summary</p>
+
             <div>
               <span>Subtotal</span>
               <span>{money(subtotal, lines[0]?.currencyCode)}</span>
-            </div>
+              </div>
+
             <div>
               <span>Shipping</span>
               <span>Calculated at checkout</span>
-            </div>
-            <button type="button" disabled>
-              Checkout coming soon
-            </button>
-            <small>Online checkout is not available yet.</small>
+              </div>
+
+              {checkoutUrl ? (
+                <a
+                  className="checkout-button"
+                  href={checkoutUrl}
+                >
+                  Checkout
+                </a>
+              ) : null}
           </aside>
         </div>
       )}

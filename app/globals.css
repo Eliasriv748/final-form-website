@@ -780,6 +780,29 @@ body:has(.home-landing) .mobile-menu {
     text-decoration: underline;
     text-transform: lowercase;
 }
+.order-summary .checkout-button {
+    align-items: center;
+    background: var(--signal);
+    border: 1px solid var(--signal);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: 11px;
+    justify-content: center;
+    letter-spacing: 0.12em;
+    margin-top: 24px;
+    min-height: 52px;
+    padding: 17px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: lowercase;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.order-summary .checkout-button:hover {
+    background: var(--signal-hover);
+}
 .order-summary {
     align-self: start;
     border: 1px solid var(--line);
@@ -796,6 +819,34 @@ body:has(.home-landing) .mobile-menu {
     margin-bottom: 24px;
     text-transform: lowercase;
 }
+.order-summary > a {
+    align-items: center;
+    background: var(--signal);
+    border: 1px solid var(--signal);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-family: var(--sans);
+    font-size: 11px;
+    justify-content: center;
+    letter-spacing: 0.12em;
+    margin-top: 24px;
+    min-height: 52px;
+    padding: 17px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: lowercase;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+    width: 100%;
+}
+
+.order-summary > a:hover {
+    background: var(--signal-hover);
+    border-color: var(--signal-hover);
+    color: white;
+}
 .order-summary > div {
     border-bottom: 1px solid var(--line);
     display: flex;
@@ -807,18 +858,6 @@ body:has(.home-landing) .mobile-menu {
 }
 .order-summary > div span:last-child {
     text-align: right;
-}
-.order-summary > button {
-    background: var(--paper-deep);
-    border: 1px solid var(--line);
-    color: var(--dark-text);
-    cursor: not-allowed;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    margin-top: 24px;
-    padding: 18px;
-    text-transform: lowercase;
-    width: 100%;
 }
 .order-summary small {
     color: var(--dark-text);
@@ -915,6 +954,16 @@ body:has(.home-landing) .mobile-menu {
         gap: 42px;
         grid-template-columns: 1fr;
         padding: 28px var(--gutter) 60px;
+    }
+    .product-card__media {
+        padding-top: 56px;
+    }
+
+    .product-card__media > span {
+        top: 18px;
+        left: 18px;
+        z-index: 2;
+        font-size: 8px;
     }
     .product-card__meta h3 {
         font-size: 19px;

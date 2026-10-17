@@ -13,7 +13,15 @@ function money(amount: number, currencyCode = "USD") {
 }
 
 export function CartDrawer() {
-  const { lines, count, subtotal, open, setOpen, changeQuantity } = useCart();
+  const {
+    lines,
+    count,
+    subtotal,
+    checkoutUrl,
+    open,
+    setOpen,
+    changeQuantity,
+  } = useCart();
   const closeButton = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLElement>(null);
 
@@ -124,6 +132,15 @@ export function CartDrawer() {
           <Link href="/cart" onClick={() => setOpen(false)}>
             Review cart
           </Link>
+
+          {checkoutUrl && lines.length > 0 ? (
+            <a
+              href={checkoutUrl}
+              onClick={() => setOpen(false)}
+            >
+              Checkout
+            </a>
+          ) : null}
         </div>
       </aside>
     </>

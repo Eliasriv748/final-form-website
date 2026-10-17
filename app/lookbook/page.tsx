@@ -34,7 +34,7 @@ export default function LookbookPage() {
             <div className={styles.photo}>
               <Image
                 src={image.src}
-                alt={image.alt}
+                alt={image.alt ?? "Final Form lookbook image"}
                 fill
                 sizes="(max-width: 700px) 92vw, 30vw"
               />
