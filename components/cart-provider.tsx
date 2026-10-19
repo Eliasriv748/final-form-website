@@ -52,14 +52,8 @@ type CartContextValue = {
   open: boolean;
   setOpen: (open: boolean) => void;
   addLine: (line: Omit<CartLine, "quantity">) => Promise<void>;
-  changeQuantity: (
-    merchandiseId: string,
-    delta: number,
-  ) => Promise<void>;
-
-  removeLine: (
-    merchandiseId: string,
-  ) => Promise<void>;
+  changeQuantity: (merchandiseId: string, delta: number) => Promise<void>;
+  removeLine: (merchandiseId: string) => Promise<void>;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -97,13 +91,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const frame = requestAnimationFrame(() => {
       try {
         setLines(
-          normaliseCart(
-            JSON.parse(localStorage.getItem(CART_KEY) ?? "[]"),
-          ),
+          normaliseCart(JSON.parse(localStorage.getItem(CART_KEY) ?? "[]")),
         );
-        setCheckoutUrl(
-          localStorage.getItem(SHOPIFY_CHECKOUT_KEY),
-        );
+
+        setCheckoutUrl(localStorage.getItem(SHOPIFY_CHECKOUT_KEY));
       } catch {
         setLines([]);
       } finally {
@@ -125,11 +116,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (event.key !== CART_KEY) return;
 
       try {
-        setLines(
-          normaliseCart(
-            JSON.parse(event.newValue ?? "[]"),
-          ),
-        );
+        setLines(normaliseCart(JSON.parse(event.newValue ?? "[]")));
       } catch {
         setLines([]);
       }
@@ -152,159 +139,170 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addLine = useCallback(
     async (line: Omit<CartLine, "quantity">) => {
-      const existingShopifyCartId =
-        localStorage.getItem(SHOPIFY_CART_KEY);
+      if (cartBusy) return;
 
-      let response: Response;
+      setCartBusy(true);
 
-      if (!existingShopifyCartId) {
-        response = await fetch("/api/cart/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            merchandiseId: line.merchandiseId,
-          }),
-        });
-      } else {
-        response = await fetch("/api/cart/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            cartId: existingShopifyCartId,
-            merchandiseId: line.merchandiseId,
-          }),
-        });
-      }
+      try {
+        const existingShopifyCartId = localStorage.getItem(SHOPIFY_CART_KEY);
 
-      if (!response.ok) {
-        const errorText = await response.text();
+        let response: Response;
 
-        console.error(
-          "Unable to sync Shopify cart:",
-          errorText || `HTTP ${response.status}`,
-        );
-
-        return;
-      }
-
-      const cart = (await response.json()) as ShopifyCartResponse;
-
-      localStorage.setItem(SHOPIFY_CART_KEY, cart.id);
-      localStorage.setItem(
-        SHOPIFY_CHECKOUT_KEY,
-        cart.checkoutUrl,
-      );
-
-      setCheckoutUrl(cart.checkoutUrl);
-
-      const shopifyLine = cart.lines.nodes.find(
-        (item) =>
-          item.merchandise.id === line.merchandiseId,
-      );
-
-      if (!shopifyLine) {
-        console.error(
-          "Shopify cart line was not returned for:",
-          line.merchandiseId,
-        );
-        return;
-      }
-
-      setLines((current) => {
-        const existing = current.find(
-          (item) =>
-            item.merchandiseId === line.merchandiseId,
-        );
-
-        if (!existing) {
-          return [
-            ...current,
-            {
-              ...line,
-              shopifyLineId: shopifyLine.id,
-              quantity: shopifyLine.quantity,
+        if (!existingShopifyCartId) {
+          response = await fetch("/api/cart/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          ];
+            body: JSON.stringify({
+              merchandiseId: line.merchandiseId,
+            }),
+          });
+        } else {
+          response = await fetch("/api/cart/add", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              cartId: existingShopifyCartId,
+              merchandiseId: line.merchandiseId,
+            }),
+          });
         }
 
-        return current.map((item) =>
-          item.merchandiseId === line.merchandiseId
-            ? {
-                ...item,
+        if (!response.ok) {
+          const errorText = await response.text();
+
+          console.error(
+            "Unable to sync Shopify cart:",
+            errorText || `HTTP ${response.status}`,
+          );
+
+          return;
+        }
+
+        const cart = (await response.json()) as ShopifyCartResponse;
+
+        localStorage.setItem(SHOPIFY_CART_KEY, cart.id);
+
+        localStorage.setItem(SHOPIFY_CHECKOUT_KEY, cart.checkoutUrl);
+
+        setCheckoutUrl(cart.checkoutUrl);
+
+        const shopifyLine = cart.lines.nodes.find(
+          (item) => item.merchandise.id === line.merchandiseId,
+        );
+
+        if (!shopifyLine) {
+          console.error(
+            "Shopify cart line was not returned for:",
+            line.merchandiseId,
+          );
+
+          return;
+        }
+
+        setLines((current) => {
+          const existing = current.find(
+            (item) => item.merchandiseId === line.merchandiseId,
+          );
+
+          if (!existing) {
+            return [
+              ...current,
+              {
+                ...line,
                 shopifyLineId: shopifyLine.id,
                 quantity: shopifyLine.quantity,
-              }
-            : item,
-        );
-      });
+              },
+            ];
+          }
 
-      setOpen(true);
+          return current.map((item) =>
+            item.merchandiseId === line.merchandiseId
+              ? {
+                  ...item,
+                  shopifyLineId: shopifyLine.id,
+                  quantity: shopifyLine.quantity,
+                }
+              : item,
+          );
+        });
+
+        setOpen(true);
+      } finally {
+        setCartBusy(false);
+      }
     },
-    [],
+    [cartBusy],
   );
 
   const removeLine = useCallback(
     async (merchandiseId: string) => {
-      const cartId = localStorage.getItem(SHOPIFY_CART_KEY);
+      if (cartBusy) return;
 
-      if (!cartId) {
-        console.error("Missing Shopify cart ID.");
-        return;
-      }
+      setCartBusy(true);
 
-      const currentLine = lines.find(
-        (line) => line.merchandiseId === merchandiseId,
-      );
+      try {
+        const cartId = localStorage.getItem(SHOPIFY_CART_KEY);
 
-      if (!currentLine?.shopifyLineId) {
-        console.error("Missing Shopify cart line ID.");
-        return;
-      }
+        if (!cartId) {
+          console.error("Missing Shopify cart ID.");
+          return;
+        }
 
-      const response = await fetch("/api/cart/remove", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cartId,
-          lineId: currentLine.shopifyLineId,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-
-        console.error(
-          "Unable to remove line from Shopify cart:",
-          errorText || `HTTP ${response.status}`,
+        const currentLine = lines.find(
+          (line) => line.merchandiseId === merchandiseId,
         );
 
-        return;
+        if (!currentLine?.shopifyLineId) {
+          console.error("Missing Shopify cart line ID.");
+          return;
+        }
+
+        const response = await fetch("/api/cart/remove", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cartId,
+            lineId: currentLine.shopifyLineId,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+
+          console.error(
+            "Unable to remove line from Shopify cart:",
+            errorText || `HTTP ${response.status}`,
+          );
+
+          return;
+        }
+
+        const cart = (await response.json()) as ShopifyCartResponse;
+
+        localStorage.setItem(SHOPIFY_CHECKOUT_KEY, cart.checkoutUrl);
+
+        setCheckoutUrl(cart.checkoutUrl);
+
+        setLines((current) =>
+          current.filter((line) => line.merchandiseId !== merchandiseId),
+        );
+      } finally {
+        setCartBusy(false);
       }
-
-      const cart = (await response.json()) as ShopifyCartResponse;
-
-      localStorage.setItem(
-        SHOPIFY_CHECKOUT_KEY,
-        cart.checkoutUrl,
-      );
-
-      setLines((current) =>
-        current.filter(
-          (line) => line.merchandiseId !== merchandiseId,
-        ),
-      );
     },
-    [lines],
+    [lines, cartBusy],
   );
 
   const changeQuantity = useCallback(
     async (merchandiseId: string, delta: number) => {
+      if (cartBusy) return;
+
       const cartId = localStorage.getItem(SHOPIFY_CART_KEY);
 
       if (!cartId) {
@@ -328,71 +326,68 @@ export function CartProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      const response = await fetch("/api/cart/update", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cartId,
-          lineId: currentLine.shopifyLineId,
-          quantity: newQuantity,
-        }),
-      });
+      setCartBusy(true);
 
-      if (!response.ok) {
-        const errorText = await response.text();
+      try {
+        const response = await fetch("/api/cart/update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            cartId,
+            lineId: currentLine.shopifyLineId,
+            quantity: newQuantity,
+          }),
+        });
 
-        console.error(
-          "Unable to update Shopify cart:",
-          errorText || `HTTP ${response.status}`,
-        );
+        if (!response.ok) {
+          const errorText = await response.text();
 
-        return;
-      }
-
-      const cart = (await response.json()) as ShopifyCartResponse;
-
-      localStorage.setItem(
-        SHOPIFY_CHECKOUT_KEY,
-        cart.checkoutUrl,
-      );
-
-      setLines((current) =>
-        current.map((line) => {
-          const shopifyLine = cart.lines.nodes.find(
-            (item) =>
-              item.merchandise.id === line.merchandiseId,
+          console.error(
+            "Unable to update Shopify cart:",
+            errorText || `HTTP ${response.status}`,
           );
 
-          if (!shopifyLine) {
-            return line;
-          }
+          return;
+        }
 
-          return {
-            ...line,
-            shopifyLineId: shopifyLine.id,
-            quantity: shopifyLine.quantity,
-          };
-        }),
-      );
+        const cart = (await response.json()) as ShopifyCartResponse;
+
+        localStorage.setItem(SHOPIFY_CHECKOUT_KEY, cart.checkoutUrl);
+
+        setCheckoutUrl(cart.checkoutUrl);
+
+        setLines((current) =>
+          current.map((line) => {
+            const shopifyLine = cart.lines.nodes.find(
+              (item) => item.merchandise.id === line.merchandiseId,
+            );
+
+            if (!shopifyLine) {
+              return line;
+            }
+
+            return {
+              ...line,
+              shopifyLineId: shopifyLine.id,
+              quantity: shopifyLine.quantity,
+            };
+          }),
+        );
+      } finally {
+        setCartBusy(false);
+      }
     },
-    [lines, removeLine],
+    [lines, removeLine, cartBusy],
   );
-
-
 
   const value = useMemo(
     () => ({
       lines,
-      count: lines.reduce(
-        (total, line) =>
-          total + line.quantity,
-        0,
-      ),
+      count: lines.reduce((total, line) => total + line.quantity, 0),
       subtotal: lines.reduce(
-        (total, line) =>
-          total + line.price * line.quantity,
+        (total, line) => total + line.price * line.quantity,
         0,
       ),
       checkoutUrl,
@@ -402,30 +397,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
       changeQuantity,
       removeLine,
     }),
-    [
-      lines,
-      checkoutUrl,
-      open,
-      addLine,
-      changeQuantity,
-      removeLine,
-    ],
+    [lines, checkoutUrl, open, addLine, changeQuantity, removeLine],
   );
 
-  return (
-    <CartContext.Provider value={value}>
-      {children}
-    </CartContext.Provider>
-  );
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
   const cart = useContext(CartContext);
 
   if (!cart) {
-    throw new Error(
-      "useCart must be used inside CartProvider.",
-    );
+    throw new Error("useCart must be used inside CartProvider.");
   }
 
   return cart;
