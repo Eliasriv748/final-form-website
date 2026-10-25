@@ -22,6 +22,8 @@ const CART_CREATE_MUTATION = `#graphql
               ... on ProductVariant {
                 id
                 title
+                availableForSale
+                quantityAvailable
               }
             }
           }
@@ -54,6 +56,8 @@ type CartCreateResponse = {
           merchandise: {
             id: string;
             title: string;
+            availableForSale: boolean;
+            quantityAvailable: number | null;
           };
         }>;
       };

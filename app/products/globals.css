@@ -682,6 +682,17 @@ body:has(.home-landing) .mobile-menu {
     background: var(--paper-deep);
     border-color: var(--signal);
 }
+.qty button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: transparent;
+    border-color: var(--line);
+}
+
+.qty button:disabled:hover {
+    background: transparent;
+    border-color: var(--line);
+}
 .qty span {
     font-size: 12px;
     text-align: center;

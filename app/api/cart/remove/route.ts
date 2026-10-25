@@ -19,6 +19,8 @@ const CART_LINES_REMOVE_MUTATION = `#graphql
               ... on ProductVariant {
                 id
                 title
+                availableForSale
+                quantityAvailable
               }
             }
           }
@@ -45,6 +47,8 @@ type CartLinesRemoveResponse = {
           merchandise: {
             id: string;
             title: string;
+            availableForSale: boolean;
+            quantityAvailable: number | null;
           };
         }>;
       };
@@ -64,17 +68,11 @@ export async function POST(request: Request) {
     const lineId = body.lineId;
 
     if (!cartId || typeof cartId !== "string") {
-      return NextResponse.json(
-        { error: "Missing cartId" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing cartId" }, { status: 400 });
     }
 
     if (!lineId || typeof lineId !== "string") {
-      return NextResponse.json(
-        { error: "Missing lineId" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing lineId" }, { status: 400 });
     }
 
     const data = await shopifyFetch<CartLinesRemoveResponse>({

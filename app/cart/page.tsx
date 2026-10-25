@@ -11,14 +11,8 @@ function money(amount: number, currency = "USD") {
 }
 
 export default function CartPage() {
-  const {
-    lines,
-    count,
-    subtotal,
-    checkoutUrl,
-    changeQuantity,
-    removeLine,
-  } = useCart();
+  const { lines, count, subtotal, checkoutUrl, changeQuantity, removeLine } =
+    useCart();
 
   return (
     <main className="cart-page">
@@ -53,6 +47,11 @@ export default function CartPage() {
                     <span>{line.quantity}</span>
                     <button
                       type="button"
+                      disabled={
+                        !line.preorder &&
+                        line.quantityAvailable != null &&
+                        line.quantity >= line.quantityAvailable
+                      }
                       onClick={() => changeQuantity(line.merchandiseId, 1)}
                     >
                       +
@@ -73,26 +72,23 @@ export default function CartPage() {
             ))}
           </section>
           <aside className="order-summary">
-              <p>Order summary</p>
+            <p>Order summary</p>
 
             <div>
               <span>Subtotal</span>
               <span>{money(subtotal, lines[0]?.currencyCode)}</span>
-              </div>
+            </div>
 
             <div>
               <span>Shipping</span>
               <span>Calculated at checkout</span>
-              </div>
+            </div>
 
-              {checkoutUrl ? (
-                <a
-                  className="checkout-button"
-                  href={checkoutUrl}
-                >
-                  Checkout
-                </a>
-              ) : null}
+            {checkoutUrl ? (
+              <a className="checkout-button" href={checkoutUrl}>
+                Checkout
+              </a>
+            ) : null}
           </aside>
         </div>
       )}

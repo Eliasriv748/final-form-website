@@ -22,6 +22,8 @@ const CART_LINES_ADD_MUTATION = `#graphql
               ... on ProductVariant {
                 id
                 title
+                availableForSale
+                quantityAvailable
               }
             }
           }
@@ -48,6 +50,8 @@ type CartLinesAddResponse = {
           merchandise: {
             id: string;
             title: string;
+            availableForSale: boolean;
+            quantityAvailable: number | null;
           };
         }>;
       };
@@ -67,16 +71,10 @@ export async function POST(request: Request) {
     const merchandiseId = body.merchandiseId;
 
     if (!cartId || typeof cartId !== "string") {
-      return NextResponse.json(
-        { error: "Missing cartId" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing cartId" }, { status: 400 });
     }
 
-    if (
-      !merchandiseId ||
-      typeof merchandiseId !== "string"
-    ) {
+    if (!merchandiseId || typeof merchandiseId !== "string") {
       return NextResponse.json(
         { error: "Missing merchandiseId" },
         { status: 400 },
@@ -98,12 +96,23 @@ export async function POST(request: Request) {
     });
 
     if (data.cartLinesAdd.userErrors.length > 0) {
-      return NextResponse.json(
-        {
-          errors: data.cartLinesAdd.userErrors,
-        },
-        { status: 400 },
+      const errors = data.cartLinesAdd.userErrors;
+
+      const cartNotFound = errors.some((error) =>
+        /cart.*(not found|does not exist|expired|invalid)/i.test(error.message),
       );
+
+      if (cartNotFound) {
+        return NextResponse.json(
+          {
+            error: "CART_EXPIRED",
+            message: "The Shopify cart is no longer available.",
+          },
+          { status: 404 },
+        );
+      }
+
+      return NextResponse.json({ errors }, { status: 400 });
     }
 
     if (!data.cartLinesAdd.cart) {
@@ -115,9 +124,7 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json(
-      data.cartLinesAdd.cart,
-    );
+    return NextResponse.json(data.cartLinesAdd.cart);
   } catch (error) {
     console.error("CART ADD ERROR:", error);
 

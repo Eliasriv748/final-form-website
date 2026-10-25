@@ -13,15 +13,8 @@ function money(amount: number, currencyCode = "USD") {
 }
 
 export function CartDrawer() {
-  const {
-    lines,
-    count,
-    subtotal,
-    checkoutUrl,
-    open,
-    setOpen,
-    changeQuantity,
-  } = useCart();
+  const { lines, count, subtotal, checkoutUrl, open, setOpen, changeQuantity } =
+    useCart();
   const closeButton = useRef<HTMLButtonElement>(null);
   const drawer = useRef<HTMLElement>(null);
 
@@ -111,6 +104,11 @@ export function CartDrawer() {
                     <button
                       type="button"
                       aria-label={`Increase ${line.name} quantity`}
+                      disabled={
+                        !line.preorder &&
+                        line.quantityAvailable != null &&
+                        line.quantity >= line.quantityAvailable
+                      }
                       onClick={() => changeQuantity(line.merchandiseId, 1)}
                     >
                       +
@@ -134,10 +132,7 @@ export function CartDrawer() {
           </Link>
 
           {checkoutUrl && lines.length > 0 ? (
-            <a
-              href={checkoutUrl}
-              onClick={() => setOpen(false)}
-            >
+            <a href={checkoutUrl} onClick={() => setOpen(false)}>
               Checkout
             </a>
           ) : null}

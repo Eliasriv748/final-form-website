@@ -65,24 +65,15 @@ export async function POST(request: Request) {
     const quantity = body.quantity;
 
     if (!cartId || typeof cartId !== "string") {
-      return NextResponse.json(
-        { error: "Missing cartId" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing cartId" }, { status: 400 });
     }
 
     if (!lineId || typeof lineId !== "string") {
-      return NextResponse.json(
-        { error: "Missing lineId" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Missing lineId" }, { status: 400 });
     }
 
     if (!Number.isInteger(quantity) || quantity < 1) {
-      return NextResponse.json(
-        { error: "Invalid quantity" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Invalid quantity" }, { status: 400 });
     }
 
     const data = await shopifyFetch<CartLinesUpdateResponse>({
@@ -100,10 +91,25 @@ export async function POST(request: Request) {
     });
 
     if (data.cartLinesUpdate.userErrors.length > 0) {
-      return NextResponse.json(
-        { errors: data.cartLinesUpdate.userErrors },
-        { status: 400 },
+      const errors = data.cartLinesUpdate.userErrors;
+
+      const cartExpired = errors.some(
+        (error) =>
+          error.field?.includes("cartId") &&
+          /does not exist|not found|expired/i.test(error.message),
       );
+
+      if (cartExpired) {
+        return NextResponse.json(
+          {
+            error: "CART_EXPIRED",
+            message: "The Shopify cart is no longer available.",
+          },
+          { status: 404 },
+        );
+      }
+
+      return NextResponse.json({ errors }, { status: 400 });
     }
 
     if (!data.cartLinesUpdate.cart) {
