@@ -38,7 +38,12 @@ type ShopifyCartResponse = {
     nodes: Array<{
       id: string;
       quantity: number;
-      merchandise: { id: string; title: string };
+      merchandise: {
+        id: string;
+        title: string;
+        availableForSale: boolean;
+        quantityAvailable: number | null;
+      };
     }>;
   };
 };
@@ -122,6 +127,7 @@ function mergeShopifyLines(
       ...line,
       shopifyLineId: remote.id,
       quantity: remote.quantity,
+      quantityAvailable: remote.merchandise.quantityAvailable,
     };
   });
 }
@@ -383,6 +389,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
                 ...line,
                 shopifyLineId: newLine.id,
                 quantity: newLine.quantity,
+                quantityAvailable: newLine.merchandise.quantityAvailable,
               },
             ];
           return current.map((item) =>
@@ -391,6 +398,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
                   ...item,
                   shopifyLineId: newLine.id,
                   quantity: newLine.quantity,
+                  quantityAvailable: newLine.merchandise.quantityAvailable,
                 }
               : item,
           );
