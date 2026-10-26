@@ -81,7 +81,7 @@
     font-family: var(--display);
     font-size: clamp(40px, 4.7vw, 90px);
     font-weight: 00;
-    letter-spacing: -0.045em;
+    letter-spacing: 0.03em;
     line-height: 1.15;
     padding: 12px 4px;
     position: relative;
