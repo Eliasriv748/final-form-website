@@ -2,7 +2,7 @@ export const productEditorial: Record<
   string,
   { description: string; details: string[] }
 > = {
-  "the-final-ringer": {
+  "final-ringer-red": {
     description: "Old-era athletic construction, cut for movement now.",
     details: [
       "Classic athletic fit",

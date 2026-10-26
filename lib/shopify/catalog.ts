@@ -1,6 +1,5 @@
 import type { Product } from "@/lib/products";
 import { productEditorial } from "@/lib/product-editorial";
-import { previewProducts } from "@/lib/catalog";
 import { isShopifyConfigured, shopifyFetch } from "@/lib/shopify/client";
 
 const PRODUCTS_QUERY = `#graphql
