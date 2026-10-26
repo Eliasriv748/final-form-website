@@ -1,4 +1,6 @@
 import type { Product } from "@/lib/products";
+import { productEditorial } from "@/lib/product-editorial";
+import { previewProducts } from "@/lib/catalog";
 import { isShopifyConfigured, shopifyFetch } from "@/lib/shopify/client";
 
 const PRODUCTS_QUERY = `#graphql
@@ -51,14 +53,15 @@ type ShopifyProduct = {
 
 function mapProduct(product: ShopifyProduct): Product {
   const colorOption = product.options.find((option) => option.name.toLowerCase() === "color");
+  const editorial = productEditorial[product.handle];
 
   return {
     id: product.id,
     handle: product.handle,
     title: product.title,
     color: colorOption?.optionValues.map(({ name }) => name).join(" / ") || product.productType,
-    description: product.description,
-    details: product.description ? [product.description] : [],
+    description: editorial?.description ?? product.description,
+    details: editorial?.details ?? [],
     images: product.images.nodes,
     variants: product.variants.nodes.map((variant) => ({
       ...variant,
