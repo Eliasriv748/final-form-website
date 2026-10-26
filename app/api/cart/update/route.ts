@@ -19,6 +19,8 @@ const CART_LINES_UPDATE_MUTATION = `#graphql
               ... on ProductVariant {
                 id
                 title
+                availableForSale
+                quantityAvailable
               }
             }
           }
@@ -45,6 +47,8 @@ type CartLinesUpdateResponse = {
           merchandise: {
             id: string;
             title: string;
+            availableForSale: boolean;
+            quantityAvailable: number | null;
           };
         }>;
       };
