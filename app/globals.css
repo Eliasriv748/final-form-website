@@ -337,10 +337,11 @@ body:has(.home-landing) .mobile-menu {
     padding-top: 20px;
 }
 .product-card__meta h3 {
+    font-family: var(--sans);
     font-size: clamp(17px, 1.8vw, 28px);
     font-weight: 400;
-    letter-spacing: -0.025em;
-    -webkit-text-stroke: 0.2px currentColor;
+    letter-spacing: 0;
+    -webkit-text-stroke: 0;
 }
 .product-card__meta p {
     color: var(--dark-text);
